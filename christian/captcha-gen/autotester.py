@@ -45,7 +45,11 @@ def audio_to_text(fname):
     #print('hs', transcript)
     return transcript
                 
-
+def getScore(str1, str2):
+    score = 0
+    for a, i in zip(str1, str2):
+        score = score + 1 if a == i else score
+    return score
 
 if __name__ == "__main__":
     
@@ -83,10 +87,14 @@ if __name__ == "__main__":
     generator = gencaptcha.NumOnWordsCaptchaGenerator(settings)
     captchas = generator.generate_captchas('captcha', 5)
     predictions = {}
+    score = 0
     
     for fname in captchas.keys():
-        print "prediction: ", audio_to_text(fname) 
-        print "actual: ", captchas[fname]
+        pred = audio_to_text(fname) 
+        real = captchas[fname].replace(" ", "")
+        print "prediction: ", pred
+        print "actual: ", real
+        print(getScore(pred, real))
         
 
 

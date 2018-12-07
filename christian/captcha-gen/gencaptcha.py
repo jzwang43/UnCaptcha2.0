@@ -20,6 +20,14 @@ def ensure_equal_length(noise, captcha):
 def ensure_dir(dirname):
     if(not os.path.exists(dirname)): os.mkdir(dirname)
 
+def prettify(numstr):
+    s = ''
+    for n in numstr.split(" "):
+        if n == 'zero':
+            s+= '0'
+        else:
+            s += n
+    return s
 '''
 generates a number captcha with word noise
 author: jizhen wang, christian roncal
@@ -68,7 +76,7 @@ class NumOnWordsCaptchaGenerator:
         wavwrite(captcha_audio, outputfname, 22050)
         
         # return output filename and the answer
-        return outputfname, numstr
+        return outputfname, prettify(numstr)
     
 
     '''
