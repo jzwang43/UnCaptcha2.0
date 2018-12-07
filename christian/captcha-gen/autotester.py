@@ -86,7 +86,7 @@ if __name__ == "__main__":
     
     for fname in captchas.keys():
         print "prediction: ", audio_to_text(fname) 
-        print "actual: ", captchas[fname].trim()
+        print "actual: ", captchas[fname]
         
 
 
