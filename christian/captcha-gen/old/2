@@ -1,0 +1,23 @@
+from google.cloud import texttospeech
+import os
+
+# returns filename from wordstring
+def make_audio(wordstring, outputfname):
+    client = texttospeech.TextToSpeechClient()
+    
+    # set text input
+    synthesis_input = texttospeech.types.SynthesisInput(text=wordstring)
+    
+    voice = texttospeech.types.VoiceSelectionParams(
+            language_code='en-US',
+            ssml_gender=texttospeech.enums.SsmlVoiceGender.NEUTRAL)
+
+    audio_config = texttospeech.types.AudioConfig(audio_encoding=texttospeech.enums.AudioEncoding.LINEAR16)
+
+    response = client.synthesize_speech(synthesis_input, voice, audio_config)
+
+    output = outputfname+'.wav'
+    with open(outputfname+'.wav', 'w+') as out:
+        out.write(str(response.audio_content))
+
+    return
