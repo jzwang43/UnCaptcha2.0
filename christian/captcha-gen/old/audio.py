@@ -9,7 +9,7 @@ from google.cloud import texttospeech
 import re
 import subprocess
 
-file = open('wordbank.txt', 'r')
+file = open('./wordbank.txt', 'r')
 text = file.read()
 re.sub(r'[^\w\s]','',text)
 words=text.split()

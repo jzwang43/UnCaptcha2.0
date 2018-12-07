@@ -11,6 +11,7 @@ from pydub import AudioSegment
 
 # Converts the mp3 to flac file
 file_name = os.path.join(os.path.dirname(__file__),'audio.wav')
+print('FILENAME: ', file_name)
 #file_name = 'audio.mp3'
 sound = AudioSegment.from_mp3(file_name)
 file_name = os.path.join(os.path.dirname(__file__),'audio.flac')

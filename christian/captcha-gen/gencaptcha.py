@@ -62,32 +62,36 @@ class NumOnWordsCaptchaGenerator:
         captcha_audio =  self.noise_vol * wordaudio_data + self.captcha_vol * numaudio_data
         
         outputfname = self.outputdir + fname
-        print outputfname
+
         if(os.path.exists(outputfname)): os.remove(outputfname)
 
         wavwrite(captcha_audio, outputfname, 22050)
         
         # return output filename and the answer
-        return fname, numstr
+        return outputfname, numstr
     
 
     '''
     genreate multiple captchas
     '''
     def generate_captchas(self, fname, n = 1):
+        res = {}
         for i in range(n):
-            print self.new_numeral_captcha_on_words(fname + str(i))
+            captcha = self.new_numeral_captcha_on_words(fname + str(i)+".wav")
+            res[captcha[0]] = captcha[1]
+
+        return res
 
 
-#if __name__ == "__main__":
-#    settings = {
-#                'wordbank':'./wordbanks/wordbank.pkl',
-#                'dir': './captchas/',
-#                'noise-vol': .55,
-#                'captcha_vol': 1.1,
-#                'nnums': 5
-#               }
-#    generator = NumOnWordsCaptchaGenerator(settings)
-#    generator.generate_captchas('test', 3)
-#    
-
+#    if __name__ == "__main__":
+#       settings = {
+#                   'wordbank':'./wordbanks/wordbank.pkl',
+#                   'dir': './captchas/',
+#                   'noise-vol': .54,
+#                   'captcha_vol': 1.2,
+#                   'nnums': 5
+#                  }
+#       generator = NumOnWordsCaptchaGenerator(settings)
+#       generator.generate_captchas('test', 3)
+#   
+#
