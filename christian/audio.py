@@ -53,8 +53,17 @@ with open('output.wav', 'w+') as out:
     #print('Audio content written to file "output.wav"')
     
 
-noise = ''.join(["%s " % randint(0, 9) for num in range(0, 6)])
-print(noise)
+# noise = ''.join(["%s " % randint(0, 9) for num in range(0, 6)])
+
+def get_num_str(n):
+   s = ''
+   for num in range(n):
+       r = randint(0, 9)
+       s += 'zero ' if r == 0 else str(r) + ' '
+   return s
+
+noise = get_num_str(6)
+print("noise: ", noise)
 synthesis_input = texttospeech.types.SynthesisInput(text=noise)
 
 response = client.synthesize_speech(synthesis_input, voice, audio_config)
@@ -78,7 +87,7 @@ if (len(data1) < len(data2)):
     data2 = data2[:len(data1)]
 
 
-result = 0.8 * data1 + 1.2 * data2
+result = 0.65 * data1 + 1 * data2
 wavwrite(result, 'audio.wav', 22050)
 
 python3_command = "python rec.py"  # launch your python2 script using bash
