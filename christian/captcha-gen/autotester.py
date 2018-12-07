@@ -17,7 +17,7 @@ def mp3_to_flac(fname):
     file_name = os.path.join(os.path.dirname(__file__), fname)
     #print "filename: ", file_name
     sound = AudioSegment.from_mp3(file_name)
-    file_name = os.path.join(os.path.dirname(__file__), fname +".flac")
+    file_name = os.path.join(os.path.dirname(__file__), fname )
     sound.export(file_name, format='flac', parameters=['-ac', '1'])
     return file_name
 
