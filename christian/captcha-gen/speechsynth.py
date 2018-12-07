@@ -1,14 +1,16 @@
 '''
 Speech synthesizer module, need to have google cloud texttospeech api activated
-Author: Christian Roncal
+from google cloud example
 '''
 
 
 from google.cloud import texttospeech
 import os
 
+
+# deletes existing file if the same name
 # returns filename from wordstring
-def make_audio(wordstring, outputfname):
+def make_audio(wordstring, outputfname, outputfolder='./'):
     client = texttospeech.TextToSpeechClient()
     
     # set text input
@@ -25,8 +27,10 @@ def make_audio(wordstring, outputfname):
     # response
     response = client.synthesize_speech(synthesis_input, voice, audio_config)
     
-    # write to file --- WILL CAUSE AN ERROR IF FILE EXISTS
-    output = outputfname+'.wav'
+    output = outputfolder + outputfname+'.wav'
+    # write to file --- WILL DELETE FILE IF EXISTS
+    if os.path.exists(output): os.remove(output)
+
     with open(output, 'w+') as out:
         out.write(str(response.audio_content))
 

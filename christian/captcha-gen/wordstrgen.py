@@ -17,4 +17,11 @@ def get_random_wordstr(pklfname, n):
 
     return ' '.join(words)
 
+def get_random_numstr(n):
+    s = ''
 
+    for num in range(n):
+        r = random.randint(0,9)
+        s += 'zero ' if r == 0 else str(r) + ' '
+    
+    return s
