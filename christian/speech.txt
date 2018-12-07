@@ -1,0 +1,14 @@
+add
+multiply
+times
+divide
+by
+minus
+positive
+negative
+over
+hello
+world
+what's
+up
+dog
