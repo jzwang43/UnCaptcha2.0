@@ -85,7 +85,7 @@ if __name__ == "__main__":
 #    predictions = {}
 #
     generator = gencaptcha.NumOnWordsCaptchaGenerator(settings)
-    captchas = generator.generate_captchas('captcha', 40)
+    captchas = generator.generate_captchas('captcha', 12)
     predictions = {}
     nsolved = 0
     
@@ -99,7 +99,7 @@ if __name__ == "__main__":
         nsolved = nsolved + 1 if getScore(pred, real) > 3 else nsolved
 
     
-    print "solved: " + str(nsolved) + " ; gstt success rate: " + str(nsolved / 40)
+    print "solved: " + str(nsolved) + " ; gstt success rate: " + str(nsolved / 12.0)
         
 
 
