@@ -85,7 +85,9 @@ class NumOnWordsCaptchaGenerator:
     def generate_captchas(self, fname, n = 1):
         res = {}
         for i in range(n):
-            captcha = self.new_numeral_captcha_on_words(fname + str(i)+".wav")
+            outname = fname + str(i)+".wav"
+            captcha = self.new_numeral_captcha_on_words(outname)
+            print outname, " created."
             res[captcha[0]] = captcha[1]
 
         return res

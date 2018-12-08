@@ -48,8 +48,8 @@ def audio_to_text(fname):
 def getScore(str1, str2):
     score = 0
     for a, i in zip(str1, str2):
-        score = score + 1 if a == i else score
-    return score
+        score = score + 1 if a == i else score - 1
+    return max(score, 0)
 
 if __name__ == "__main__":
     
@@ -92,12 +92,14 @@ if __name__ == "__main__":
     for fname in captchas.keys():
         pred = audio_to_text(fname) 
         real = captchas[fname].replace(" ", "")
+        score =  getScore(pred, real)
         print "prediction: ", pred
         print "actual: ", real
+        print "score: ", score
         nsolved = nsolved + 1 if getScore(pred, real) > 3 else nsolved
 
     
-    print "solved: " + nsolved + " ; gstt success rate: " + nsolved / 40
+    print "solved: " + str(nsolved) + " ; gstt success rate: " + str(nsolved / 40)
         
 
 
