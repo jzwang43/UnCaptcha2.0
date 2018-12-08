@@ -16,3 +16,4 @@ Dividend
 Divider
 Sum
 difference
+multiplier

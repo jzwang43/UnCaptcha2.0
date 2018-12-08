@@ -45,10 +45,14 @@ def audio_to_text(fname):
     #print('hs', transcript)
     return transcript
                 
-def getScore(str1, str2):
+def getScore(pred, real):
     score = 0
-    for a, i in zip(str1, str2):
+    for a, i in zip(pred, real):
         score = score + 1 if a == i else score - 1
+
+    if len(pred) > len(real):
+        score -= len(pred) - len(real)
+
     return max(score, 0)
 
 if __name__ == "__main__":
@@ -67,8 +71,8 @@ if __name__ == "__main__":
     settings = {
            'wordbank':'./wordbanks/wordbank.pkl',
            'dir': './captchas/',
-           'noise-vol': .54,
-           'captcha_vol': 1.2,
+           'noise-vol': .6,
+           'captcha_vol': 1.125,
            'nnums': 5
           }
 
@@ -85,7 +89,7 @@ if __name__ == "__main__":
 #    predictions = {}
 #
     generator = gencaptcha.NumOnWordsCaptchaGenerator(settings)
-    captchas = generator.generate_captchas('captcha', 12)
+    captchas = generator.generate_captchas('captcha', 5)
     predictions = {}
     nsolved = 0
     
@@ -96,11 +100,9 @@ if __name__ == "__main__":
         print "prediction: ", pred
         print "actual: ", real
         print "score: ", score
-        nsolved = nsolved + 1 if getScore(pred, real) > 3 else nsolved
+        nsolved = nsolved + 1 if getScore(pred, real) > 2 else nsolved
 
     
-    print "solved: " + str(nsolved) + " ; gstt success rate: " + str(nsolved / 12.0)
-        
-
+    print "solved: " + str(nsolved) + " ; gstt success rate: " + str(nsolved / 5.0)
 
 
