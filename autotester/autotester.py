@@ -85,16 +85,19 @@ if __name__ == "__main__":
 #    predictions = {}
 #
     generator = gencaptcha.NumOnWordsCaptchaGenerator(settings)
-    captchas = generator.generate_captchas('captcha', 5)
+    captchas = generator.generate_captchas('captcha', 40)
     predictions = {}
-    score = 0
+    nsolved = 0
     
     for fname in captchas.keys():
         pred = audio_to_text(fname) 
         real = captchas[fname].replace(" ", "")
         print "prediction: ", pred
         print "actual: ", real
-        print(getScore(pred, real))
+        nsolved = nsolved + 1 if getScore(pred, real) > 3 else nsolved
+
+    
+    print "solved: " + nsolved + " ; gstt success rate: " + nsolved / 40
         
 
 
