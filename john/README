@@ -1,0 +1,1 @@
+run 'pip install gTTS' before runnung audiocraft.py
