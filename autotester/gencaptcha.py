@@ -1,5 +1,4 @@
 '''
-creates and tests captchas
 author: christian roncal, jizhen wang
 '''
 import os
@@ -28,6 +27,10 @@ def prettify(numstr):
         else:
             s += n
     return s
+
+def addGaussianNoise(audio_loc):
+    pass
+
 '''
 generates a number captcha with word noise
 author: jizhen wang, christian roncal
@@ -79,6 +82,7 @@ class NumOnWordsCaptchaGenerator:
         return outputfname, prettify(numstr)
     
 
+
     '''
     genreate multiple captchas
     '''
@@ -87,7 +91,7 @@ class NumOnWordsCaptchaGenerator:
         for i in range(n):
             outname = fname + str(i)+".wav"
             captcha = self.new_numeral_captcha_on_words(outname)
-            print outname, " created."
+            print outname, " created.", "answer: ", captcha
             res[captcha[0]] = captcha[1]
 
         return res

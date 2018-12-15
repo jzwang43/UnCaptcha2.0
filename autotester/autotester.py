@@ -11,6 +11,7 @@ from google.cloud import speech
 from google.cloud.speech import enums
 from google.cloud.speech import types
 from pydub import AudioSegment
+import numpy as np
 
 # author: jizhen wang
 def mp3_to_flac(fname):
@@ -89,7 +90,7 @@ if __name__ == "__main__":
 #    predictions = {}
 #
     generator = gencaptcha.NumOnWordsCaptchaGenerator(settings)
-    captchas = generator.generate_captchas('captcha', 5)
+#   captchas = generator.generate_captchas('captcha', 5)
     predictions = {}
     nsolved = 0
     
