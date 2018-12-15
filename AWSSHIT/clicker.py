@@ -6,7 +6,8 @@ URL = "https://patrickhlauke.github.io/recaptcha/"
 FIREFOX_LOC = 356, 581
 CAPTCHA_BOX_LOC = 40, 273
 AUDIO_BOX_LOC = 138, 535
-AUDIO_DL_LOC = 202, 323
+AUDIO_DL_LOC = 201, 325
+SAVE_LINK_AS_LOC = 201, 307
 
 ### FIREFOX shortcuts
 def refresh_browser():
@@ -35,15 +36,16 @@ def goto_URL(url):
 open_firefox()
 time.sleep(2)
 goto_URL(URL)
-
 # for i in range(10):
 pgui.dragTo(CAPTCHA_BOX_LOC)
 pgui.click()
 time.sleep(3)
 pgui.dragTo(AUDIO_BOX_LOC)
 pgui.click()
-# tab twice to get the download
-pgui.dragTo(AUDIO_DL_LOC)
-pgui.rightClick()
-
+time.sleep(1)
+pgui.press('tab')
+pgui.press('tab')
+pgui.press('enter')
+time.sleep(1)
+pgui.press('enter')
 #	refresh_browser()
