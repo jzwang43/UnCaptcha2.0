@@ -72,8 +72,8 @@ if __name__ == "__main__":
     settings = {
            'wordbank':'./wordbanks/wordbank.pkl',
            'dir': './captchas/',
-           'noise-vol': .6,
-           'captcha_vol': 1.125,
+           'noise-vol': .74285,
+           'captcha_vol': .92857,
            'nnums': 5
           }
 
@@ -85,12 +85,12 @@ if __name__ == "__main__":
 #           'nnums': args.ncaptcha
 #          }
 #
-#    generator = gencaptcha.NumOnWordsCaptchaGenerator(settings)
+    generator = gencaptcha.NumOnWordsCaptchaGenerator(settings)
 #    captchas = generator.generate_captchas(args.filename, args.ncaptcha)
 #    predictions = {}
 #
-    generator = gencaptcha.NumOnWordsCaptchaGenerator(settings)
-#   captchas = generator.generate_captchas('captcha', 5)
+#    generator = gencaptcha.NumOnWordsCaptchaGenerator(settings)
+    captchas = generator.generate_captchas('captcha', 10)
     predictions = {}
     nsolved = 0
     
@@ -104,6 +104,6 @@ if __name__ == "__main__":
         nsolved = nsolved + 1 if getScore(pred, real) > 2 else nsolved
 
     
-    print "solved: " + str(nsolved) + " ; gstt success rate: " + str(nsolved / 5.0)
+    print "solved: " + str(nsolved) + " ; gstt success rate: " + str(nsolved / 10.0)
 
 
