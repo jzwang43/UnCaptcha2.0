@@ -64,16 +64,17 @@ def getScore(pred, real):
 if __name__ == "__main__":
     
     f = open('data.csv', 'w+')
-    f.write('captcha_volume,noise_volume,accuracy\n')
-    captcha_vol_range = np.linspace(.0125, 2, 8)
+    f.write('captcha_volume,noise_volume,accuracy%\n')
+    captcha_vol_range = np.linspace(.5, 2, 8)
     s = 10
     iters = 0
 
+    print 'captcha vol', 'noise vol'
     for cv in captcha_vol_range:
 
         iters += 1
-        for nv in np.linspace(.0125, cv, iters):
-            print 'processing: ' + str(nv) + ', ' + str(cv)
+        for nv in np.linspace(cv - (.40 * cv) , cv, iters):
+            print 'processing: ' + str(cv) + ', ' + str(nv)
 
             settings = {
                 'wordbank':'./wordbanks/wordbank.pkl',
@@ -86,7 +87,7 @@ if __name__ == "__main__":
             # captcha generator object see gencaptcha.py
             generator = gencaptcha.NumOnWordsCaptchaGenerator(settings)
             # returns a dictionary in form {filename : solution}
-            captchas = generator.generate_captchas('captcha', 10)
+            captchas = generator.generate_captchas('captcha', 5)
             predictions = {}
             nsolved = 0
 
@@ -97,6 +98,7 @@ if __name__ == "__main__":
                 nsolved = nsolved + 1 if getScore(pred, real) > 2 else nsolved
 
             
-            f.write(str(cv) + "," + str(nv) + "," + str(nsolved/10.0) + '\n')
+            f.write(str(cv) + "," + str(nv) + "," + str(nsolved/5.0) + '\n')
 
+    f.write('\n')
     f.close()
